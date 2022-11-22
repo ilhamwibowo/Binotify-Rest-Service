@@ -6,7 +6,9 @@
   "scripts": {
     "main": "dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/app.js",
+    "build":"tsc",
+    "start": "node dist/app.js",
+    "dev" : "nodemon dist/app.js",
     "lint": "eslint . --ext .ts"
   },
   "repository": {
@@ -17,9 +19,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.11.9",
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.25.7"
   }
 }
