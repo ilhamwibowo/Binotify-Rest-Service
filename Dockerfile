@@ -1,8 +1,11 @@
 FROM node:alpine
-WORKDIR /app
+WORKDIR /usr/local/apps/myapp/rest
 COPY package.json ./
 COPY package-lock.json ./
 COPY ./ ./
-RUN npm i
+
+EXPOSE 8000
+
+RUN npm install && npm cache clean --force
 RUN npm run build
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]
