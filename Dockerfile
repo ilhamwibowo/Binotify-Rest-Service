@@ -7,5 +7,4 @@ COPY ./ ./
 EXPOSE 8000
 
 RUN npm install && npm cache clean --force
-RUN npm run build
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

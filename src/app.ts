@@ -1,15 +1,21 @@
+import { getUsers, register, login } from "./controller/user";
+import verify from "./middleware/verify"
 const express = require('express')
-const mysql = require('mysql');
-import getUsers from "./controller/user";
+const bodyParser = require('body-parser')
 
 const app = express();
 const port = 8000;
 
-app.get('/', getUsers)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/hello', function(req,res) {
-  res.send("hello bang");
-})
+app.get('/', getUsers)
+app.post('/register', register)
+app.post('/login', login)
+
+app.get("/protected-stuff", verify, (req, res) => {
+  res.status(200).json( { msg:" p bang token anda berhasil yeyeeyy " });
+});
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
