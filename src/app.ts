@@ -1,4 +1,5 @@
 import { getUsers, register, login } from "./controller/user";
+import { getSongs } from "./controller/song";
 import verify from "./middleware/verify"
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -9,7 +10,7 @@ const port = 8000;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', getUsers)
+app.get('/', getSongs)
 app.post('/register', register)
 app.post('/login', login)
 
