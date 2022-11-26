@@ -4,7 +4,8 @@ import db from "../config/db"
 const Song = db.define('song', {
     song_id:{
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     judul:{
         type: DataTypes.STRING

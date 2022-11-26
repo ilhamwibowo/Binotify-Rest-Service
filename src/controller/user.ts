@@ -35,7 +35,7 @@ export const register = async(req, res) => {
             password: hash,
             username: username,
         });
-        res.json({msg: "Success!"});
+        res.status(201).statujson({msg: "Success!"});
     } catch (error) {
         console.log(error);
     }
