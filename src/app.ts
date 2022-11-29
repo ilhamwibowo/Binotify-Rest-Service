@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/register", register);
 app.post("/login", login);
 
-app.get("/song", getPremiumSongs);
+app.get("/song/:id", getPremiumSongs);
 app.put("/song", updateSong);
 app.post("/song", createSong);
 app.delete("/song", deleteSong);
