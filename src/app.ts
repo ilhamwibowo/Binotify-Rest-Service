@@ -15,6 +15,7 @@ const port = 8000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get("/user", getUsers);
 app.post("/register", register);
 app.post("/login", login);
 
