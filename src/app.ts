@@ -18,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get("/user", getUsers);
 app.post("/register", register);
 app.post("/login", login);
 app.post("/verify", verify, (req, res) => {
