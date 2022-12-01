@@ -14,6 +14,10 @@ export const getUsers = async (req, res) => {
 export const register = async (req, res) => {
   const { name, username, email, password, confirm_password } = req.body;
 
+  if (!name || !username || !email || !password || !confirm_password) {
+    res.status(400).json({ msg: "cant be empty" });
+  }
+
   const user_exist = await User.findOne({
     where: {
       email: email,
@@ -40,6 +44,7 @@ export const register = async (req, res) => {
       password: hash,
       username: username,
     });
+
     res.status(201).json({ msg: "Success!" });
   } catch (error) {
     console.log(error);
