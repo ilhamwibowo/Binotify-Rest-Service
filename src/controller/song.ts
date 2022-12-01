@@ -5,10 +5,9 @@ import db from "../config/db";
 export const getPremiumSongs = async(req, res) => {
 
     const id = req.params.id;
-    const subscription = [1, 2];
 
     try {
-        const [songs, metadata] = await db.query("SELECT song_id, judul, audio_path, penyanyi_id, name FROM song JOIN user ON song.penyanyi_id = user.user_id WHERE penyanyi_id IN (" + subscription + ")");
+        const [songs, metadata] = await db.query("SELECT song_id, judul, audio_path, penyanyi_id, name FROM song JOIN user ON song.penyanyi_id = user.user_id WHERE penyanyi_id = " + id);
         console.log(songs);
         res.status(201).json(songs);
     } catch (error) {
