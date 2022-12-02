@@ -36,3 +36,20 @@ export const rejectSubscribe = (req, res) => {
     });
   });
 };
+
+export const getSubscriptionByStatus = (req, res) => {
+  var args = {
+    arg0: "PENDING",
+  };
+
+  soap.createClient(url, {}, function (err, client) {
+    client.getSubscriptionByStatus(args, function (err, result) {
+      if (err) {
+        res.status(400).json({ msg: "failed" });
+      }  else {
+        console.log(result);
+        res.status(200).json(result);
+      }
+    })
+  }) 
+}
