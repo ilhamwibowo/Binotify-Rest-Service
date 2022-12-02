@@ -51,5 +51,23 @@ export const getSubscriptionByStatus = (req, res) => {
         res.status(200).json(result);
       }
     })
+  })
+
+}
+
+export const getSubscriptionBySubscriber = (req, res) => {
+  var args = {
+    arg0: req.params.id,
+  }
+
+  soap.createClient(url, {}, function (err, client) {
+    client.getSubscriptionBySubscriber(args, function (err, result) {
+      if (err) {
+        res.status(400).json({ msg: "failed" });
+      } else {
+        console.log(result);
+        res.status(200).json(result);
+      }
+    })
   }) 
 }
