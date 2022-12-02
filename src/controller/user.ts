@@ -45,7 +45,27 @@ export const register = async (req, res) => {
       username: username,
     });
 
-    res.status(201).json({ msg: "Success!" });
+    //create token
+    const accessToken = jwt.sign(
+      { username, email },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: "2h",
+      }
+    );
+
+    const usr = await User.findOne({
+      where: {
+        username: username,
+      },
+    });
+
+    res.status(200).json({
+      msg: "Logged In!",
+      accessToken: accessToken,
+      user_id: usr.user_id,
+      isAdmin: 0,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -55,7 +75,7 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({
       where: {
-        email: req.body.email,
+        username: req.body.username,
       },
     });
     //validate password
@@ -63,11 +83,10 @@ export const login = async (req, res) => {
     if (!match) return res.status(400).json({ msg: "Wrong Password" });
 
     //create token
-    const userId = user.user_id;
-    const name = user.name;
+    const username = user.username;
     const email = user.email;
     const accessToken = jwt.sign(
-      { userId, name, email },
+      { username, email },
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "2h",
@@ -80,6 +99,8 @@ export const login = async (req, res) => {
     res.json({
       msg: "Logged In!",
       accessToken: accessToken,
+      user_id: user.user_id,
+      isAdmin: user.isAdmin,
     });
   } catch (error) {
     res.status(404).json({ msg: "Invalid credentials" });
