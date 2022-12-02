@@ -5,8 +5,13 @@ import {
   updateSong,
   deleteSong,
 } from "./controller/song";
+import { 
+  acceptSubscribe, 
+  getSubscriptionByStatus, 
+  rejectSubscribe, 
+  getSubscriptionBySubscriber,
+  addSubscription } from "./controller/soap";
 import verify from "./middleware/verify";
-import { acceptSubscribe, getSubscriptionByStatus, rejectSubscribe, getSubscriptionBySubscriber } from "./controller/soap";
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -28,7 +33,8 @@ app.post("/verify", verify, (req, res) => {
 
 app.post("/subscribe/accept", acceptSubscribe);
 app.post("/subscribe/reject", rejectSubscribe);
-app.post("/subscribe/request", getSubscriptionByStatus);
+app.post("/subscribe", getSubscriptionByStatus);
+app.post("/subscribe/add", addSubscription);
 app.post("/subscribe/:id", getSubscriptionBySubscriber);
 
 app.get("/song/:id", getPremiumSongs);
