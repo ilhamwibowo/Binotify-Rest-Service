@@ -40,7 +40,7 @@ app.post("/subscribe/:id", getSubscriptionBySubscriber);
 app.get("/song/:id", getPremiumSongs);
 app.put("/song", updateSong);
 app.post("/song", createSong);
-app.delete("/song", deleteSong);
+app.post("/song/delete", deleteSong);
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
